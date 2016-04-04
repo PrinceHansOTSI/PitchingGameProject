@@ -10,12 +10,101 @@ import UIKit
 
 class GameController: UIViewController {
 
+    let z1tapGestureRecognizer = UITapGestureRecognizer()
+    @IBOutlet weak var zone1Label: UILabel!
+    
+    var balls: Int = 0
+    var strikes: Int = 0
+    var outs: Int = 0
+    
+    @IBOutlet weak var ballsTallyLabel: UILabel!
+    @IBOutlet weak var strikesTallyLabel: UILabel!
+    @IBOutlet weak var outsTallyLabel: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        var valueFromFirstVC: Int!
+//    
+//        z1tapGestureRecognizer.addTarget(self, action: "tapFunction")
+//        zone1Label.addGestureRecognizer(z1tapGestureRecognizer)
+//        zone1Label.userInteractionEnabled = true
+        
     }
 
+
+    func tapFunction()
+    {
+        print("tap. strike!")
+        
+        //make the label BIGGER
+    }
+   
+   
+    
+    var startTouchPoint: CGPoint!
+    
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        super.touchesBegan(touches, withEvent: event)
+        startTouchPoint = (touches.first! as UITouch).locationInView(view)
+        print("touchpoint x: ",startTouchPoint!.x,"touchpoint y: ",startTouchPoint!.y)
+        print(zone1Label.frame.contains(startTouchPoint)) //thank you
+
+    
+    }
+    /************************************************************* END TOUCH POINT IS ONLY NEEDED LATER, FOR CALCULATING PITCH MOVEMENT. DO IT LATER ********************************
+    var endTouchPoint: CGPoint!
+    
+    override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        super.touchesEnded(touches, withEvent: event)
+        let endTouchPoint = (touches.first! as UITouch).locationInView(view)
+        print("end touch point: ", endTouchPoint.x, endTouchPoint.y)
+    }
+    *************************************************************/
+ 
+//    let strikeZoneRect = CGRect(x: 100, y: 100, width: 150, height: 400)
+//    func CGRectContainsPoint(strikeZoneRect:CGRect, startTouchPoint: CGPoint) -> Bool{
+//    
+//    
+////    struct CGSize { var width: CGFloat var height: CGFloat init() init(width(500): CGFloat, height(1000): CGFloat) }
+////    struct strikeRect { var origin: CGPoint var size: CGSize init() init(origin origin: CGPoint, size 600: CGSize) }
+////    let strikeZoneRect = CGRect(
+////        origin: CGPoint(x: 300, y: 1000),
+////        size: UIScreen.mainScreen().bounds.size
+////    )
+//    
+//    
+//    return true
+//        print("strike!")
+//    }
+//
+    func isItAStrike() -> Bool
+    {
+        if zone1Label.frame.contains(startTouchPoint) == true
+        {
+      return true
+            
+        }
+        else
+        {
+            return false
+        }
+      
+    }
+    
+    
+    
+    
+    
+    
+    // call func touches Began from halfInning class
+    //call func touches Ended from halfInning class
+    //it will gather data between the 2 data CG points to determine the pitchType, original pitch placement, resulting pitch location,
+    //the computer will determine whether to swing or not based on the count (balls/strikes) and the original placement position, (and maybe perceived speed)
+    
+
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
